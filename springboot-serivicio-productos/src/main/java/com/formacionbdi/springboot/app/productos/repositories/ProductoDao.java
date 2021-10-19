@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ProductoDao extends CrudRepository<Producto, Long> {
-
     List<Producto> findAll();
 }

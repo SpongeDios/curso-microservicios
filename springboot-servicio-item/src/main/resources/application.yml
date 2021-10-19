@@ -1,0 +1,4 @@
+microservicio:
+  url:
+    allProducts: http://localhost:8001/listar
+    productById: http://localhost:8001/ver/{id}

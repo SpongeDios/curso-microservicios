@@ -11,9 +11,11 @@ import java.util.List;
 @Service
 public class ProductoServiceImpl implements ProductoService {
 
-    @Autowired
     private ProductoDao productoDao;
 
+    public ProductoServiceImpl(ProductoDao productoDao) {
+        this.productoDao = productoDao;
+    }
 
     @Override
     public List<Producto> findAll() {

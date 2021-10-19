@@ -5,6 +5,6 @@ import com.formacionbdi.springboot.app.productos.models.Producto;
 import java.util.List;
 
 public interface ProductoService {
-    public List<Producto> findAll();
-    public Producto findById(Long id);
+    List<Producto> findAll();
+    Producto findById(Long id);
 }
