@@ -22,8 +22,6 @@ public class ItemServiceImpl implements ItemService {
     @Value("${microservicio.url.productById}")
     private String verPorId;
 
-
-
     private RestTemplate restTemplate;
 
     public ItemServiceImpl(RestTemplate restTemplate) {
