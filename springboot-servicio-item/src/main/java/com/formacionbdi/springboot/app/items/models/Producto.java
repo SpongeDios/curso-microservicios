@@ -1,5 +1,7 @@
 package com.formacionbdi.springboot.app.items.models;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import java.util.Date;
 
 public class Producto {
@@ -8,6 +10,7 @@ public class Producto {
     private String nombre;
     private Double precio;
     private Date createAt;
+    private Integer port;
 
     public Long getId() {
         return id;
@@ -39,5 +42,13 @@ public class Producto {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public Integer getPort() {
+        return port;
+    }
+
+    public void setPort(Integer port) {
+        this.port = port;
     }
 }

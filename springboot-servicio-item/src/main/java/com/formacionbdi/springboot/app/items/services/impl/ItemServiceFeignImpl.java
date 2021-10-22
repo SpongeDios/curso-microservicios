@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Primary //se usa primary, porque tenemos dos clases que implementan la interface ItemService.
+//@Primary//se usa primary, porque tenemos dos clases que implementan la interface ItemService.
 //Al tener primary, este tendra prioridad sobre el otro.
 public class ItemServiceFeignImpl implements ItemService {
 

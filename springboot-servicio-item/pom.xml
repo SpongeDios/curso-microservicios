@@ -39,6 +39,12 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
             <version>3.0.4</version>
         </dependency>
+        <!--        Añadimos esta dependencia para poder declararlo como un cliente del servidor de eureka-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <version>3.0.4</version>
+        </dependency>
 
     </dependencies>
 
