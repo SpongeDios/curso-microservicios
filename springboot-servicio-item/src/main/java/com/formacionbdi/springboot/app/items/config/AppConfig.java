@@ -35,7 +35,7 @@ public class AppConfig {
                     .circuitBreakerConfig(CircuitBreakerConfig.custom()
                             .slidingWindowSize(10) //cantidad de peticiones a realizar, pasó de 100 a 10
                             .failureRateThreshold(50) //% de umbral de fallas permitidas
-                            .waitDurationInOpenState(Duration.ofSeconds(10L)) //10 segundos dentro del estado semi-abierto
+                            .waitDurationInOpenState(Duration.ofSeconds(10L)) //10 segundos dentro del estado abierto, para luego volver al semi abierto
                             .permittedNumberOfCallsInHalfOpenState(5) //numero de peticiones en estado semi-abierto
                             .slowCallRateThreshold(50) // % de umbral de llamadas lentas si pasa del 50,pasa a abierto
                             .slowCallDurationThreshold(Duration.ofSeconds(2L))//tiempo que se deberia demorar para ser considerado una llamada lenta

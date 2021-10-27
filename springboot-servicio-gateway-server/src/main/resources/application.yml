@@ -1,3 +1,31 @@
+#configuracion de resilience4j. Lo mismo que esta en el AppConfig pero en un YML
+#resilience4j:
+#  circuitbreaker:
+#    configs:
+#      defecto:
+#        sliding-window-size: 6
+#        failure-rate-threshold: 50
+#        wait-duration-in-open-state: 20s
+#        permitted-number-of-calls-in-half-open-state: 4
+#        slow-call-rate-threshold: 50
+#        slow-call-duration-threshold: 2s
+#    instances:
+#      productos:
+#        base-config: defecto
+#  timelimiter:
+#    configs:
+#      defecto:
+#        timeout-duration: 2s
+#    intances:
+#      productos:
+#        base-config: defecto
+
+#cuando le dices intances: items: base-config: defecto le dices que le añada la configuracion
+#recientemente declarada a items
+
+#filters:
+#  - StripPrefix=2
+#  - CircuitBreaker=productos
 spring:
   cloud:
     gateway:
