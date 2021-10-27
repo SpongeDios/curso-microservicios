@@ -34,7 +34,7 @@ public class ItemController {
     @GetMapping("/ver/{id}/cantidad/{cantidad}")
     public Item itemById(@PathVariable Long id, @PathVariable Integer cantidad){
 //        return itemService.findById(id, cantidad);
-        return circuitBreakerFactory.create("items").run(() -> itemService.findById(id, cantidad)/*, e -> metodoAlternativo(id, cantidad, e) SIN METODO ALTERNATIVO= ERROR COMO RESPUESTA*/ );
+        return circuitBreakerFactory.create("items").run(() -> itemService.findById(id, cantidad/*, e -> metodoAlternativo(id, cantidad, e) SIN METODO ALTERNATIVO= ERROR COMO RESPUESTA*/ ));
     }
 
     public Item metodoAlternativo(Long id, Integer cantidad, Throwable e){

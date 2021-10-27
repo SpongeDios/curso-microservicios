@@ -2,3 +2,32 @@ microservicio:
   url:
     allProducts: http://localhost:8001/listar
     productById: http://localhost:8001/ver/{id}
+
+#configuracion de resilience4j. Lo mismo que esta en el AppConfig pero en un YML
+#todo lo que diga duration, se declara con una S al final
+#TODO la palabra items viene del itemController en la linea -> return circuitBreakerFactory.create("items").run(().....
+#El YML tiene PRIORIDAD sobre la configuracion de la clase AppConfig
+#Me acabo de dar cuenta que no sirve xdxd
+resilience4j:
+  circuitbreaker:
+    configs:
+      defecto:
+        sliding-window-size: 6
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 20s
+        permitted-number-of-calls-in-half-open-state: 4
+        slow-call-rate-threshold: 50
+        slow-call-duration-threshold: 2s
+    instances:
+      items:
+        base-config: defecto
+  timelimiter:
+    configs:
+      defecto:
+        timeout-duration: 6s
+    intances:
+      items:
+        base-config: defecto
+
+#cuando le dices intances: items: base-config: defecto le dices que le añada la configuracion
+#recientemente declarada a items
