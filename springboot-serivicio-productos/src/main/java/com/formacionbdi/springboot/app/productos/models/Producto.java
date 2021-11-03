@@ -1,11 +1,13 @@
 package com.formacionbdi.springboot.app.productos.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@JsonIgnoreProperties
 @Entity
 @Table(name = "products")
 public class Producto {

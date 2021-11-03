@@ -3,6 +3,11 @@ microservicio:
     allProducts: http://localhost:8001/listar
     productById: http://localhost:8001/ver/{id}
 
+#Configuracion para que los endpoints con @RefreshScope se refresquen sin necesidad de
+#reiniciar el microservicio
+
+
+
 #configuracion de resilience4j. Lo mismo que esta en el AppConfig pero en un YML
 #todo lo que diga duration, se declara con una S al final
 #TODO la palabra items viene del itemController en la linea -> return circuitBreakerFactory.create("items").run(().....

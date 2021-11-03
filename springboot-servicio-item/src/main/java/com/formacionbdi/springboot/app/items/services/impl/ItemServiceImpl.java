@@ -5,6 +5,9 @@ import com.formacionbdi.springboot.app.items.models.Producto;
 import com.formacionbdi.springboot.app.items.services.ItemService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -42,5 +45,23 @@ public class ItemServiceImpl implements ItemService {
         pathVariables.put("id", id.toString());
         Producto producto = restTemplate.getForObject("http://servicio-productos/ver/{id}", Producto.class, pathVariables);
         return new Item(producto, cantidad);
+    }
+
+    @Override
+    public Producto save(Producto producto) {
+        HttpEntity<Producto> entity = new HttpEntity<Producto>(producto);
+        return restTemplate.postForObject("http://servicio-productos/crear", entity, Producto.class);
+    }
+
+    @Override
+    public Producto update(Producto producto, Long id) {
+        HttpEntity<Producto> entity = new HttpEntity<Producto>(producto);
+        ResponseEntity<Producto> response = restTemplate.exchange("http://servicio-productos/editar/"+id, HttpMethod.PUT, entity, Producto.class);
+        return response.getBody();
+    }
+
+    @Override
+    public void delete(Long id) {
+        restTemplate.delete("http://servicio-productos/eliminar/"+id);
     }
 }

@@ -8,27 +8,44 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
+ // @RefreshScope--> Permite actualizar los componentes/variables de entorno que nos traemos del configserver
+// sin necesidad de reiniciar el microservicio o el configserver
 @RestController
+@RefreshScope
 //@RequestMapping("/api/items")
 public class ItemController {
     private final Logger logger = LoggerFactory.getLogger(ItemController.class);
     private ItemService itemService;
     private CircuitBreakerFactory circuitBreakerFactory;
+    private Environment environment;
 
-    public ItemController(ItemService itemService, CircuitBreakerFactory circuitBreakerFactory) {
+
+    public ItemController(ItemService itemService, CircuitBreakerFactory circuitBreakerFactory, Environment environment) {
         this.itemService = itemService;
         this.circuitBreakerFactory = circuitBreakerFactory;
+        this.environment = environment;
     }
+
+    @Value("${configuracion.text}")
+    private String texto;
+
+    @Value("${server.port}")
+    private String port;
 
     @GetMapping("/listar")
     public List<Item> allProducts(){
@@ -81,6 +98,37 @@ public class ItemController {
         return CompletableFuture.supplyAsync(() -> item);
     }
 
+    @GetMapping("/obtener-config")
+    public ResponseEntity<?> obtenerConfig(){
+        logger.info("CALLING API /obtener-config");
+        Map<String, String> mapa = new HashMap<>();
+        mapa.put("texto", texto);
+        mapa.put("puerto", port);
 
+        String activeAmbient = String.valueOf(environment.getProperty("spring.cloud.config.profile"));
+        if (activeAmbient.equals("dev")){
+            mapa.put("autor.nombre", environment.getProperty("configuracion.autor.nombre"));
+            mapa.put("autor.email", environment.getProperty("configuracion.autor.email"));
+        }
+
+
+        return ResponseEntity.status(HttpStatus.OK).body(mapa);
+    }
+
+    @PostMapping("/crear")
+    public ResponseEntity crear(@RequestBody Producto producto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(itemService.save(producto));
+    }
+
+    @PutMapping("/editar/{id}")
+    public ResponseEntity editar (@PathVariable Long id, @RequestBody Producto producto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(itemService.update(producto, id));
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminar(@PathVariable Long id){
+        itemService.delete(id);
+    }
 
 }

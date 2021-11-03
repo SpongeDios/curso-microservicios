@@ -8,11 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -54,6 +56,25 @@ public class ProductoController {
         return producto;
     }
 
+    @PostMapping("/crear")
+    //@ResponseStatus(HttpStatus.CREATED) //<--- Util pero flaite
+    public ResponseEntity<Producto> crear(@RequestBody Producto producto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(productoService.save(producto));
+    }
 
+    @PutMapping("/editar/{id}")
+    public ResponseEntity<Producto> update(@PathVariable Long id, @RequestBody Producto productoBody){
+        Producto producto = productoService.findById(id);
+        producto.setNombre(productoBody.getNombre());
+        producto.setPrecio(productoBody.getPrecio());
+        return ResponseEntity.status(HttpStatus.CREATED).body(productoService.save(producto));
+    }
 
+    @DeleteMapping("/eliminar/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete (@PathVariable Long id){
+        productoService.deleteById(id);
+        Map<String, String> mapa = new HashMap<>();
+        mapa.put("message", "Producto borrado satisfactoriamente!");
+    }
 }
