@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-@Primary
+//@Primary
 public class ItemServiceImpl implements ItemService {
 
     @Value("${microservicio.url.allProducts}")

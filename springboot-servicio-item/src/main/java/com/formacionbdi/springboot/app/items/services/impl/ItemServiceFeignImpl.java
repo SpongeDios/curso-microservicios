@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-//@Primary//se usa primary, porque tenemos dos clases que implementan la interface ItemService.
+@Primary//se usa primary, porque tenemos dos clases que implementan la interface ItemService.
 //Al tener primary, este tendra prioridad sobre el otro.
 public class ItemServiceFeignImpl implements ItemService {
 
@@ -36,16 +36,16 @@ public class ItemServiceFeignImpl implements ItemService {
 
     @Override
     public Producto save(Producto producto) {
-        return null;
+        return productoClienteRest.crear(producto);
     }
 
     @Override
     public Producto update(Producto producto, Long id) {
-        return null;
+        return productoClienteRest.update(producto, id);
     }
 
     @Override
     public void delete(Long id) {
-
+        productoClienteRest.eliminar(id);
     }
 }
