@@ -2,7 +2,8 @@ package com.formacionbdi.springboot.app.items.services.impl;
 
 import com.formacionbdi.springboot.app.items.clientes.ProductoClienteRest;
 import com.formacionbdi.springboot.app.items.models.Item;
-import com.formacionbdi.springboot.app.items.models.Producto;
+
+import com.formacionbdi.springboot.app.commons.models.Producto;
 import com.formacionbdi.springboot.app.items.services.ItemService;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Primary//se usa primary, porque tenemos dos clases que implementan la interface ItemService.
+//@Primary//se usa primary, porque tenemos dos clases que implementan la interface ItemService.
 //Al tener primary, este tendra prioridad sobre el otro.
 public class ItemServiceFeignImpl implements ItemService {
 

@@ -1,7 +1,7 @@
 package com.formacionbdi.springboot.app.items.services.impl;
 
+import com.formacionbdi.springboot.app.commons.models.Producto;
 import com.formacionbdi.springboot.app.items.models.Item;
-import com.formacionbdi.springboot.app.items.models.Producto;
 import com.formacionbdi.springboot.app.items.services.ItemService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-//@Primary
+@Primary
 public class ItemServiceImpl implements ItemService {
 
     @Value("${microservicio.url.allProducts}")

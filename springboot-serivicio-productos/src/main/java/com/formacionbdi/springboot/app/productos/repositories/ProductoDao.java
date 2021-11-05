@@ -1,6 +1,7 @@
 package com.formacionbdi.springboot.app.productos.repositories;
 
-import com.formacionbdi.springboot.app.productos.models.Producto;
+
+import com.formacionbdi.springboot.app.commons.models.Producto;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

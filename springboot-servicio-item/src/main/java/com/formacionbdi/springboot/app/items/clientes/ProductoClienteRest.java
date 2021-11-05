@@ -1,7 +1,7 @@
 package com.formacionbdi.springboot.app.items.clientes;
 
-import com.formacionbdi.springboot.app.items.models.Item;
-import com.formacionbdi.springboot.app.items.models.Producto;
+
+import com.formacionbdi.springboot.app.commons.models.Producto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

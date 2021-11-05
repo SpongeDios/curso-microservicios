@@ -1,5 +1,7 @@
 package com.formacionbdi.springboot.app.items.models;
 
+import com.formacionbdi.springboot.app.commons.models.Producto;
+
 public class Item {
 
     private Producto producto;
