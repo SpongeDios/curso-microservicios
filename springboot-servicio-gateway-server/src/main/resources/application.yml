@@ -42,3 +42,9 @@ spring:
             - Path=/api/items/**
           filters:
             - StripPrefix=2
+        - id: servicio-usuarios
+          uri: lb://servicio-usuarios
+          predicates:
+            - Path=/api/usuarios/**
+          filters:
+            - StripPrefix=2

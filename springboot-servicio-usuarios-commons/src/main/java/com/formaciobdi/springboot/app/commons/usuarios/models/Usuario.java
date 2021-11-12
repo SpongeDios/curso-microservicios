@@ -1,6 +1,7 @@
-package com.formacionbdi.springboot.app.usuarios.models;
+package com.formaciobdi.springboot.app.commons.usuarios.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
@@ -17,6 +18,21 @@ public class Usuario {
     private String apellido;
     @Column(unique = true)
     private String email;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"),
+            uniqueConstraints ={@UniqueConstraint(columnNames = {"usuario_id", "role_id"})}
+    )
+    private List<Role> roles;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public Long getId() {
         return id;

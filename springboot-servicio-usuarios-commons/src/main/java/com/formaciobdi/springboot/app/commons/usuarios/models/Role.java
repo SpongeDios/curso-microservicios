@@ -1,4 +1,4 @@
-package com.formacionbdi.springboot.app.usuarios.models;
+package com.formaciobdi.springboot.app.commons.usuarios.models;
 
 import javax.persistence.*;
 
