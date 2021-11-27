@@ -4,6 +4,7 @@ import com.formaciobdi.springboot.app.usuarios.commons.models.Usuario;
 import com.formacionbdi.springboot.app.oauth.clients.UsuarioFeignClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Primary
 public class UsuarioService implements UserDetailsService {
 
     private Logger log = LoggerFactory.getLogger(UsuarioService.class);

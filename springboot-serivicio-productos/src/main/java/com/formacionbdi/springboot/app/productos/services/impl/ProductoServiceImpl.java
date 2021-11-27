@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class ProductoServiceImpl implements ProductoService {
 
-    private ProductoDao productoDao;
+    private final ProductoDao productoDao;
 
     public ProductoServiceImpl(ProductoDao productoDao) {
         this.productoDao = productoDao;
